@@ -2,6 +2,10 @@ docker run -it \
     -e POSTGRES_USER=postgres \
     -e POSTGRES_PASSWORD=postgres \
     -e POSTGRES_DB=ny_taxi \
-    -v "$(pwd)/ny_taxi_data:/var/lib/postgresql/data" \
+    -v $(pwd)/ny_taxi_data:/var/lib/postgresql/data \
+    -u $(id -u):$(id -g) \
     -p 5432:5432 \
     postgres:17
+
+
+pgcli -h localhost -p 5432 -U postgres -d ny_taxi
